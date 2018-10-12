@@ -23,49 +23,55 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-namespace CnabPHP\resources\B033\remessa\cnab240;
+namespace CnabPHP\resources\B033\retorno\L040;
 
-use CnabPHP\resources\generico\remessa\cnab240\Generico5;
-use CnabPHP\Exception;
+use CnabPHP\resources\generico\retorno\L040\Generico9;
 
-class Registro5 extends Generico5
+class Registro9 extends Generico9
 {
+
     protected $meta = array(
         'codigo_banco' => array(
             'tamanho' => 3,
             'default' => '033',
             'tipo' => 'int',
             'required' => true
-        ),
+		),
         'codigo_lote' => array(
             'tamanho' => 4,
-            'default' => 1,
+            'default' => 9999,
             'tipo' => 'int',
             'required' => true
-        ),
+		),
         'tipo_registro' => array(
             'tamanho' => 1,
-            'default' => '5',
+            'default' => '9',
             'tipo' => 'int',
             'required' => true
-        ),
+		),
         'filler1' => array(
             'tamanho' => 9,
             'default' => ' ',
             'tipo' => 'alfa',
             'required' => true
-        ),
+		),
+        'qtd_lotes' => array(
+            'tamanho' => 6,
+            'default' => '1',
+            'tipo' => 'int',
+            'required' => true
+		),
         'qtd_registros' => array(
             'tamanho' => 6,
             'default' => '0',
             'tipo' => 'int',
             'required' => true
-        ),
+		),
         'filler2' => array(
-            'tamanho' => 217,
+            'tamanho' => 211,
             'default' => ' ',
             'tipo' => 'alfa',
             'required' => true
-        ),
+		),
     );
 }

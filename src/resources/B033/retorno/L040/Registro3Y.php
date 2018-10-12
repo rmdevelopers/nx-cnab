@@ -23,12 +23,11 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-namespace CnabPHP\resources\B033\remessa\cnab240;
+namespace CnabPHP\resources\B033\retorno\L040;
 
-use CnabPHP\resources\generico\remessa\cnab240\Generico3;
-use CnabPHP\Exception;
+use CnabPHP\resources\generico\retorno\L040\Generico3;
 
-class Registro3Q extends Generico3
+class Registro3Y extends Generico3
 {
 
     protected $meta = array(
@@ -37,139 +36,91 @@ class Registro3Q extends Generico3
             'default' => '033',
             'tipo' => 'int',
             'required' => true
-        ),
+		),
         'codigo_lote' => array(
             'tamanho' => 4,
             'default' => 1,
             'tipo' => 'int',
             'required' => true
-        ),
+		),
         'tipo_registro' => array(
             'tamanho' => 1,
             'default' => '3',
             'tipo' => 'int',
             'required' => true
-        ),
+		),
         'numero_registro' => array(
             'tamanho' => 5,
             'default' => '0',
             'tipo' => 'int',
             'required' => true
-        ),
+		),
         'seguimento' => array(
             'tamanho' => 1,
-            'default' => 'Q',
+            'default' => 'Y',
             'tipo' => 'alfa',
             'required' => true
-        ),
+		),
         'filler1' => array(
             'tamanho' => 1,
             'default' => ' ',
-            'tipo' => 'alfa',
+            'tipo' => 'int',
             'required' => true
-        ),
+		),
         'codigo_movimento' => array(
             'tamanho' => 2,
-            'default' => '01',
+            'default' => '06',
             'tipo' => 'int',
             'required' => true
-        ),
+		),
         // - ------------------ até aqui é igual para todo registro tipo 3
-        'tipo_inscricao' => array(
-            'tamanho' => 1,
-            'default' => '',
+        'identificacao_registro' => array(
+            'tamanho' => 4,
+            'default' => '04',
             'tipo' => 'int',
             'required' => true
-        ),
-        'numero_inscricao' => array(
-            'tamanho' => 15,
-            'default' => '',
-            'tipo' => 'int',
-            'required' => true
-        ),
-        'nome_pagador' => array(
-            'tamanho' => 40,
-            'default' => '',
-            'tipo' => 'alfa',
-            'required' => true
-        ),
-        'endereco_pagador' => array(
-            'tamanho' => 40,
-            'default' => '',
-            'tipo' => 'alfa',
-            'required' => true
-        ),
-        'bairro_pagador' => array(
-            'tamanho' => 15,
-            'default' => '',
-            'tipo' => 'alfa',
-            'required' => true
-        ),
-        'cep_pagador' => array(
-            'tamanho' => 8,
-            'default' => '',
-            'tipo' => 'int',
-            'required' => true
-        ),
-        'cidade_pagador' => array(
-            'tamanho' => 15,
-            'default' => '',
-            'tipo' => 'alfa',
-            'required' => true
-        ),
-        'uf_pagador' => array(
-            'tamanho' => 2,
-            'default' => '',
-            'tipo' => 'alfa',
-            'required' => true
-        ),
-        'tipo_incricao_avalista' => array(
-            'tamanho' => 1,
-            'default' => '0',
-            'tipo' => 'int',
-            'required' => true
-        ),
-        'numero_incricao_avalista' => array(
-            'tamanho' => 15,
-            'default' => '0',
-            'tipo' => 'int',
-            'required' => true
-        ),
-        'nome_avalista' => array(
-            'tamanho' => 40,
+		),
+        'identificacao_cheque1' => array(
+            'tamanho' => 34,
             'default' => ' ',
             'tipo' => 'alfa',
             'required' => true
-        ),
-        'identificador_carne' => array(
-            'tamanho' => 3,
-            'default' => '0',
-            'tipo' => 'int',
-            'required' => true
-        ),
-        'sequencia_parcela' => array(
-            'tamanho' => 3,
-            'default' => '0',
-            'tipo' => 'int',
-            'required' => true
-        ),
-        'total_parcela' => array(
-            'tamanho' => 3,
-            'default' => '0',
-            'tipo' => 'int',
-            'required' => true
-        ),
-        'numero_plano' => array(
-            'tamanho' => 3,
-            'default' => '0',
-            'tipo' => 'int',
-            'required' => true
-        ),
-        'filler13' => array(
-            'tamanho' => 19,
+		),
+        'identificacao_cheque2' => array(
+            'tamanho' => 34,
             'default' => ' ',
             'tipo' => 'alfa',
             'required' => true
-        ),
+		),
+        'identificacao_cheque3' => array(
+            'tamanho' => 34,
+            'default' => ' ',
+            'tipo' => 'alfa',
+            'required' => true
+		),
+        'identificacao_cheque4' => array(
+            'tamanho' => 34,
+            'default' => ' ',
+            'tipo' => 'alfa',
+            'required' => true
+		),
+        'identificacao_cheque5' => array(
+            'tamanho' => 34,
+            'default' => ' ',
+            'tipo' => 'alfa',
+            'required' => true
+		),
+        'identificacao_cheque6' => array(
+            'tamanho' => 34,
+            'default' => ' ',
+            'tipo' => 'alfa',
+            'required' => true
+		),
+        'filler2' => array(
+            'tamanho' => 15,
+            'default' => ' ',
+            'tipo' => 'alfa',
+            'required' => true
+		),
     );
 }
