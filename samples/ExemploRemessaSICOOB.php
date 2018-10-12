@@ -41,7 +41,7 @@ $arquivo = new Remessa(756,'cnab240',array(
 		'conta'         	=> 	'25697', // número da conta
 		'conta_dv'     		=> 	'5', // digito da conta
 		'nome_empresa' 		=>	"Empresa ABC", // seu nome de empresa
-		'numero_sequencial_arquivo'	=>	'0000001',
+		'numero_sequencial_arquivo'	=>	'0000002',
 
 		'codigo_beneficiario'	=> '58710', // codigo fornecido pelo banco
 		'codigo_beneficiario_dv'=> '8', // codigo fornecido pelo banco
@@ -52,7 +52,7 @@ $lote  = $arquivo->addLote(array('tipo_servico'=> '1')); // tipo_servico  = 1 pa
 
 $lote->inserirDetalhe(array(
 		//Registro 3P Dados do Boleto
-		'nosso_numero'      => '1800001', // numero sequencial de boleto
+		'nosso_numero'      => '1800005', // numero sequencial de boleto
 		//'nosso_numero_dv'   =>	1, // pode ser informado ou calculado pelo sistema
 		'parcela' 			=>	'01',
 		'modalidade'		=>	'1',
@@ -60,13 +60,13 @@ $lote->inserirDetalhe(array(
 		'codigo_carteira'   =>	'1', // codigo da carteira
 		'carteira'   		=>	'1', // codigo da carteira
 		'seu_numero'        =>	"DEV180001",// se nao informado usarei o nosso numero
-		'data_vencimento'   =>	'2018-04-30', // informar a data neste formato AAAA-MM-DD
+		'data_vencimento'   =>	'2018-10-30', // informar a data neste formato AAAA-MM-DD
 		'valor'             =>	'5.00', // Valor do boleto como float valido em php
 		'cod_emissao_boleto'=>	'2', // tipo de emissao do boleto informar 2 para emissao pelo beneficiario e 1 para emissao pelo banco
 		'especie_titulo'    => 	"DM", // informar dm e sera convertido para codigo em qualquer laytou conferir em especie.php
-		'data_emissao'      => 	'2018-04-05', // informar a data neste formato AAAA-MM-DD
+		'data_emissao'      => 	'2018-10-05', // informar a data neste formato AAAA-MM-DD
 		'codigo_juros'		=>	'2', // Taxa por mês,
-		'data_juros'   	  	=> 	'2018-04-30', // data dos juros, mesma do vencimento
+		'data_juros'   	  	=> 	'2018-10-30', // data dos juros, mesma do vencimento
 		'vlr_juros'         => 	'0000000000001.00', // Valor do juros/mora informa 1% e o sistema recalcula a 0,03% por 
 		// Você pode inserir desconto se houver, ou deixar em branco
 		//'codigo_desconto'	=>	'1',
@@ -92,7 +92,7 @@ $lote->inserirDetalhe(array(
 		// Você pode inserir desconto se houver, ou deixar em branco, mas quando informar
 		// deve preencher os 3 campos: codigo, data e valor
 		'codigo_multa'		=>	'2', // Taxa por mês
-		'data_multa'   	  	=> 	'2018-04-30', // data dos juros, mesma do vencimento
+		'data_multa'   	  	=> 	'2018-10-30', // data dos juros, mesma do vencimento
 		'vlr_multa'         => 	'0000000000002.00', // Valor do juros de 2% ao mês
 
 		// Registro 3S3 Mensagens a serem impressas
@@ -123,7 +123,7 @@ function verificaPastas() {
 }
 
 // Grava o arquivo
-file_put_contents(verificaPastas()->path.$arquivo->getName(), $remessa);
+file_put_contents(verificaPastas()->path.$arquivo->getFileName(), $remessa);
 verificaPastas()->close();
 echo $remessa;
 
