@@ -23,12 +23,11 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-namespace CnabPHP\resources\B033\remessa\cnab240;
+namespace CnabPHP\resources\B033\retorno\L040;
 
-use CnabPHP\resources\generico\remessa\cnab240\Generico3;
-use CnabPHP\Exception;
+use CnabPHP\resources\generico\retorno\L040\Generico3;
 
-class Registro3Q extends Generico3
+class Registro3U extends Generico3
 {
 
     protected $meta = array(
@@ -37,139 +36,148 @@ class Registro3Q extends Generico3
             'default' => '033',
             'tipo' => 'int',
             'required' => true
-        ),
+		),
         'codigo_lote' => array(
             'tamanho' => 4,
             'default' => 1,
             'tipo' => 'int',
             'required' => true
-        ),
+		),
         'tipo_registro' => array(
             'tamanho' => 1,
             'default' => '3',
             'tipo' => 'int',
             'required' => true
-        ),
+		),
         'numero_registro' => array(
             'tamanho' => 5,
             'default' => '0',
             'tipo' => 'int',
             'required' => true
-        ),
+		),
         'seguimento' => array(
             'tamanho' => 1,
-            'default' => 'Q',
+            'default' => 'U',
             'tipo' => 'alfa',
             'required' => true
-        ),
+		),
         'filler1' => array(
             'tamanho' => 1,
             'default' => ' ',
-            'tipo' => 'alfa',
+            'tipo' => 'int',
             'required' => true
-        ),
+		),
         'codigo_movimento' => array(
             'tamanho' => 2,
-            'default' => '01',
+            'default' => '',
             'tipo' => 'int',
             'required' => true
-        ),
+		),
         // - ------------------ até aqui é igual para todo registro tipo 3
-        'tipo_inscricao' => array(
-            'tamanho' => 1,
+        'vlr_juros_multa' => array(
+            'tamanho' => 13,
             'default' => '',
-            'tipo' => 'int',
+            'tipo' => 'decimal',
+            'precision' => 2,
             'required' => true
-        ),
-        'numero_inscricao' => array(
-            'tamanho' => 15,
+		),
+        'vlr_desconto' => array(
+            'tamanho' => 13,
             'default' => '',
-            'tipo' => 'int',
+            'tipo' => 'decimal',
+            'precision' => 2,
             'required' => true
-        ),
-        'nome_pagador' => array(
-            'tamanho' => 40,
+		),
+        'vlr_abatimento' => array(
+            'tamanho' => 13,
             'default' => '',
-            'tipo' => 'alfa',
+            'tipo' => 'decimal',
+            'precision' => 2,
             'required' => true
-        ),
-        'endereco_pagador' => array(
-            'tamanho' => 40,
+		),
+        'vlr_IOF' => array(
+            'tamanho' => 13,
             'default' => '',
-            'tipo' => 'alfa',
+            'tipo' => 'decimal',
+            'precision' => 2,
             'required' => true
-        ),
-        'bairro_pagador' => array(
-            'tamanho' => 15,
+		),
+        'vlr_pago' => array(
+            'tamanho' => 13,
             'default' => '',
-            'tipo' => 'alfa',
+            'tipo' => 'decimal',
+            'precision' => 2,
             'required' => true
-        ),
-        'cep_pagador' => array(
+		),
+        'vlr_liquido' => array(
+            'tamanho' => 13,
+            'default' => '',
+            'tipo' => 'decimal',
+            'precision' => 2,
+            'required' => true
+		),
+        'vlr_outras_despesas' => array(
+            'tamanho' => 13,
+            'default' => ' ',
+            'tipo' => 'decimal',
+            'precision' => 2,
+            'required' => true
+		),
+        'vlr_outros_creditos' => array(
+            'tamanho' => 13,
+            'default' => '',
+            'tipo' => 'decimal',
+            'precision' => 2,
+            'required' => true
+		),
+        'data_ocorrencia' => array(
             'tamanho' => 8,
             'default' => '',
-            'tipo' => 'int',
+            'tipo' => 'date',
             'required' => true
-        ),
-        'cidade_pagador' => array(
-            'tamanho' => 15,
-            'default' => '',
-            'tipo' => 'alfa',
+		),
+        'data_credito' => array(
+            'tamanho' => 8,
+            'default' => '0',
+            'tipo' => 'date',
             'required' => true
-        ),
-        'uf_pagador' => array(
-            'tamanho' => 2,
-            'default' => '',
-            'tipo' => 'alfa',
-            'required' => true
-        ),
-        'tipo_incricao_avalista' => array(
-            'tamanho' => 1,
+		),
+        'codigo_ocorrencia_pagador' => array(
+            'tamanho' => 4,
             'default' => '0',
             'tipo' => 'int',
             'required' => true
-        ),
-        'numero_incricao_avalista' => array(
-            'tamanho' => 15,
+		),
+        'data_ocorrencia_pagador' => array(
+            'tamanho' => 8,
             'default' => '0',
-            'tipo' => 'int',
+            'tipo' => 'date',
+            'required' => false
+		),
+        'vlr_ocorrencia_pagador' => array(
+            'tamanho' => 13,
+            'default' => '',
+            'tipo' => 'decimal',
+            'precision' => 2,
             'required' => true
-        ),
-        'nome_avalista' => array(
-            'tamanho' => 40,
+		),
+        'complemento_ocorrencia_pagador' => array(
+            'tamanho' => 30,
             'default' => ' ',
             'tipo' => 'alfa',
             'required' => true
-        ),
-        'identificador_carne' => array(
+		),
+        'codigo_banco_pagador' => array(
             'tamanho' => 3,
-            'default' => '0',
-            'tipo' => 'int',
-            'required' => true
-        ),
-        'sequencia_parcela' => array(
-            'tamanho' => 3,
-            'default' => '0',
-            'tipo' => 'int',
-            'required' => true
-        ),
-        'total_parcela' => array(
-            'tamanho' => 3,
-            'default' => '0',
-            'tipo' => 'int',
-            'required' => true
-        ),
-        'numero_plano' => array(
-            'tamanho' => 3,
-            'default' => '0',
-            'tipo' => 'int',
-            'required' => true
-        ),
-        'filler13' => array(
-            'tamanho' => 19,
             'default' => ' ',
             'tipo' => 'alfa',
             'required' => true
-        ),
+		),
+        'filler2' => array(
+            'tamanho' => 27,
+            'default' => ' ',
+            'tipo' => 'alfa',
+            'required' => true
+		),
     );
 }

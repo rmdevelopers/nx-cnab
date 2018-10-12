@@ -1,5 +1,6 @@
 # OpenCnabPHP 
 <img src="https://travis-ci.org/QuilhaSoft/OpenCnabPHP.svg?branch=master">
+
 Projeto para gerar remessa e processar retorno nos layouts cnab240 e 400<br>
 Novo projeto orientado a objeto com três níveis de hierarquia
 <ul>
@@ -26,11 +27,12 @@ docker-compose up -d
 ## Instalando via composer:
 
 
-Adicione "rctnet/opencnabphp": "dev-master" ao seu composer.json e rode update ou install
+Adicione "quilhasoft/opencnabphp": "dev-master" ao seu composer.json e rode update ou install
 
 Acesse a url de exemplo: 
 `http://localhost:8080/samples/ExemploRemessa.php`
 
+## Status de desenvolvimento
 <table>
     <tr>
         <td colspan="3" >
@@ -133,13 +135,13 @@ Acesse a url de exemplo:
             Cnab240
         </td>
         <td>
-            Beta
+            Homologado
         </td>
         <td>
            Cnab240 
         </td>
         <td>
-            s/layout
+            Beta
         </td>
     </tr>
     <tr>
@@ -171,6 +173,23 @@ Acesse a url de exemplo:
         </td>
         <td>
             Cnab240
+        </td>
+        <td>
+            Beta
+        </td>
+    </tr>
+    <tr>
+        <td>
+            SICREDI
+        </td>
+        <td>
+            Cnab400
+        </td>
+        <td>
+            Beta
+        </td>
+        <td>
+            Cnab400
         </td>
         <td>
             Beta
@@ -228,9 +247,6 @@ $lote->inserirDetalhe(array(
     'emissao_boleto'    => 2, // tipo de emissao do boleto informar 2 para emissao pelo beneficiario e 1 para emissao pelo banco
     'protestar'         => 3, // 1 = Protestar com (Prazo) dias, 3 = Devolver após (Prazo) dias
     'prazo_protesto'    => 5, // Informar o numero de dias apos o vencimento para iniciar o protesto
-    'nome_pagador'      => "JOSÉ da SILVA ALVES", // O Pagador é o cliente, preste atenção nos campos abaixo
-    'emissao_boleto'        => 2, // tipo de emissao do boleto informar 2 para emissao pelo beneficiario e 1 para emissao pelo banco
-    'protestar'        => 3, // 1 = Protestar com (Prazo) dias, 3 = Devolver após (Prazo) dias. 
     'nome_pagador'      => "JOSÉ da SILVA ALVES", // O Pagador é o cliente, preste atenção nos campos abaixo
     'tipo_inscricao'    => 1, //campo fixo, escreva '1' se for pessoa fisica, 2 se for pessoa juridica
     'numero_inscricao'  => '123.122.123-56',//cpf ou ncpj do pagador

@@ -14,13 +14,18 @@ class Generico0 extends RegistroRemAbstract
     
     public function inserirDetalhe($data)
     {
-        $class = 'CnabPHP\resources\\'.RemessaAbstract::$banco.'\remessa\\'.RemessaAbstract::$layout.'\Registro1';
+        $class = 'CnabPHP\resources\\B'.RemessaAbstract::$banco.'\remessa\\'.RemessaAbstract::$layout.'\Registro1';
         $this->children[] = new $class($data);
     }
     
     protected function set_data_gravacao($value)
     {
         $this->data['data_gravacao'] = date('Y-m-d');
+    }
+    protected function set_numero_inscricao($value)
+    {
+        $this->data['numero_inscricao'] = str_ireplace(array('.','/','-'),array(''), $value);
+
     }
 
 

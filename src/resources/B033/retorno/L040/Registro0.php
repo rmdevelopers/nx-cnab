@@ -23,12 +23,15 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-namespace CnabPHP\resources\B033\remessa\cnab240;
+namespace CnabPHP\resources\B033\retorno\L040;
 
-use CnabPHP\resources\generico\remessa\cnab240\Generico1;
+use CnabPHP\resources\generico\retorno\L040\Generico0;
+use CnabPHP\RetornoAbstract;
 
-class Registro1 extends Generico1
+class Registro0 extends Generico0
 {
+
+    public $trailler;
 
     protected $meta = array(
         'codigo_banco' => array(
@@ -39,42 +42,18 @@ class Registro1 extends Generico1
         ),
         'codigo_lote' => array(
             'tamanho' => 4,
-            'default' => 1,
+            'default' => '0000',
             'tipo' => 'int',
             'required' => true
         ),
         'tipo_registro' => array(
             'tamanho' => 1,
-            'default' => 1,
-            'tipo' => 'int',
-            'required' => true
-        ),
-        'operacao' => array(
-            'tamanho' => 1,
-            'default' => 'R',
-            'tipo' => 'alfa',
-            'required' => true
-        ),
-        'tipo_servico' => array(
-            'tamanho' => 2,
-            'default' => '01',
+            'default' => '0',
             'tipo' => 'int',
             'required' => true
         ),
         'filler1' => array(
-            'tamanho' => 2,
-            'default' => ' ',
-            'tipo' => 'alfa',
-            'required' => true
-        ),
-        'versao_layout' => array(
-            'tamanho' => 3,
-            'default' => '030',
-            'tipo' => 'int',
-            'required' => true
-        ),
-        'filler2' => array(
-            'tamanho' => 1,
+            'tamanho' => 8,
             'default' => ' ',
             'tipo' => 'alfa',
             'required' => true
@@ -91,38 +70,44 @@ class Registro1 extends Generico1
             'tipo' => 'int',
             'required' => true
         ),
-        'filler3' => array(
-            'tamanho' => 20,
-            'default' => ' ',
-            'tipo' => 'alfa',
-            'required' => true
-        ),
         'agencia' => array(
             'tamanho' => 4,
             'default' => '',
             'tipo' => 'int',
             'required' => true
         ),
-        'filler12' => array(
-            'tamanho' => 4,
+        'agencia_dv' => array(
+            'tamanho' => 1,
+            'default' => '',
+            'tipo' => 'int',
+            'required' => true
+        ),
+        'conta' => array(
+            'tamanho' => 9,
             'default' => '0',
             'tipo' => 'int',
+            'required' => true
+        ),
+        'conta_dv' => array(
+            'tamanho' => 1,
+            'default' => '',
+            'tipo' => 'int',
+            'required' => true
+        ),
+        'filler2' => array(
+            'tamanho' => 5,
+            'default' => ' ',
+            'tipo' => 'alfa',
             'required' => true
         ),
         'codigo_beneficiario' => array(
-            'tamanho' => 6,
+            'tamanho' => 9,
             'default' => '0',
             'tipo' => 'int',
             'required' => true
         ),
-        'codigo_beneficiario_dv' => array(
-            'tamanho' => 1,
-            'default' => '0',
-            'tipo' => 'int',
-            'required' => true
-        ),
-        'filler4' => array(
-            'tamanho' => 5,
+        'filler3' => array(
+            'tamanho' => 11,
             'default' => ' ',
             'tipo' => 'alfa',
             'required' => true
@@ -133,35 +118,72 @@ class Registro1 extends Generico1
             'tipo' => 'alfa',
             'required' => true
         ),
-        'mensagem1' => array(// mensagems 1 e 2 : somente use para mensagens que serao impressas de forma identica em todos os boletos do lote
-            'tamanho' => 40,
-            'default' => ' ',
-            'tipo' => 'alfa',
-            'required' => true
-        ),
-        'mensagem2' => array(// mensagems 1 e 2 : somente use para mensagens que serao impressas de forma identica em todos os boletos do lote
-            'tamanho' => 40,
-            'default' => ' ',
-            'tipo' => 'alfa',
-            'required' => true
-        ),
-        'numero_remessa' => array(
-            'tamanho' => 8,
+        'nome_banco' => array(
+            'tamanho' => 30,
             'default' => '',
+            'tipo' => 'alfa',
+            'required' => true
+        ),
+        'filler4' => array(
+            'tamanho' => 10,
+            'default' => ' ',
+            'tipo' => 'alfa',
+            'required' => true
+        ),
+        'codigo_remessa' => array(
+            'tamanho' => 1,
+            'default' => '2',
             'tipo' => 'int',
             'required' => true
         ),
-        'data_gravacao' => array(
+        'data_geracao' => array(
             'tamanho' => 8,
-            'default' => '', // nao informar a data na instanciação - gerada dinamicamente
+            'default' => '',
             'tipo' => 'date',
             'required' => true
         ),
         'filler5' => array(
-            'tamanho' => 41,
+            'tamanho' => 6,
+            'default' => ' ',
+            'tipo' => 'alfa',
+            'required' => true
+        ),
+        'numero_sequencial_arquivo' => array(
+            'tamanho' => 6,
+            'default' => '',
+            'tipo' => 'int',
+            'required' => true
+        ),
+        'versao_layout' => array(
+            'tamanho' => 3,
+            'default' => '040',
+            'tipo' => 'int',
+            'required' => true
+        ),
+        'filler6' => array(
+            'tamanho' => 74,
             'default' => ' ',
             'tipo' => 'alfa',
             'required' => true
         ),
     );
+
+    public function __construct($linhaTxt)
+    {
+        parent::__construct($linhaTxt);
+        RetornoAbstract::$linesCounter++;
+        $this->inserirDetalhe();
+    }
+
+    public function inserirDetalhe()
+    {
+        while (RetornoAbstract::$linesCounter < (count(RetornoAbstract::$lines) - 4))
+        {
+            $class = 'CnabPHP\resources\\B' . RetornoAbstract::$banco . '\retorno\\' . RetornoAbstract::$layout . '\Registro1';
+            $lote = new $class(RetornoAbstract::$lines[RetornoAbstract::$linesCounter]);
+            $class = 'CnabPHP\resources\\B' . RetornoAbstract::$banco . '\retorno\\' . RetornoAbstract::$layout . '\Registro5';
+            $lote->trailler = new $class(RetornoAbstract::$lines[RetornoAbstract::$linesCounter]);
+            $this->children[] = $lote;
+        }
+    }
 }

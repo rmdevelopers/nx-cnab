@@ -31,7 +31,7 @@ require_once ("../autoloader.php");
 
 use CnabPHP\Remessa;
 
-$arquivo = new Remessa('756','cnab240',array(
+$arquivo = new Remessa('104','cnab240_SIGCB',array(
     'nome_empresa' =>"Empresa ABC", // seu nome de empresa
     'tipo_inscricao'  => 2, // 1 para cpf, 2 cnpj 
     'numero_inscricao' => '123.122.123-56', // seu cpf ou cnpj completo
@@ -39,12 +39,15 @@ $arquivo = new Remessa('756','cnab240',array(
     'agencia_dv'    => '1', // somente o digito verificador da agencia 
     'conta'         => '3264', // número da conta
     'conta_dv'     => (string)0, // digito da conta
+    'posto' => '87', // codigo forncecido pelo sicredi obs: como o dv da agencia não é informado eu armazeno no banco de dados essa valor no dv da agencia
     'codigo_beneficiario'     => '10668', // codigo fornecido pelo banco
     'codigo_beneficiario_dv'     => '2', // codigo fornecido pelo banco
     'numero_sequencial_arquivo'     => 1,
     'situacao_arquivo' =>'P', // use T para teste e P para produ��o
     'mensagem_1'=>'Sua mensagem personalizada para todos os boletos do arquivo aqui' // suportado somente para SICOOB cnab400, mudar o numero 1 para 2,3,4,5 para incluir mais mensagens
 ));
+
+//var_dump($arquivo->getText());die;
 $lote  = $arquivo->addLote(array('tipo_servico'=> 1)); // tipo_servico  = 1 para cobrança registrada, 2 para sem registro
 
 $lote->inserirDetalhe(array(
@@ -57,7 +60,7 @@ $lote->inserirDetalhe(array(
     'cod_carteira'      => "01", // I para a maioria ddas carteiras do itau
      /* campos necessarios somente para itau,  não precisa comentar se for outro layout    */
      
-    'especie_titulo'    => "DM", // informar dm e sera convertido para codigo em qualquer laytou conferir em especie.php
+    'especie_titulo'    => "NP", // informar dm e sera convertido para codigo em qualquer laytou conferir em especie.php
     'valor'             => 100.00, // Valor do boleto como float valido em php
     'emissao_boleto'    => 2, // tipo de emissao do boleto informar 2 para emissao pelo beneficiario e 1 para emissao pelo banco
     'protestar'         => 3, // 1 = Protestar com (Prazo) dias, 3 = Devolver após (Prazo) dias
@@ -70,8 +73,8 @@ $lote->inserirDetalhe(array(
     'cep_pagador'       => '12345-123', // com hífem
     'cidade_pagador'    => 'Londrina',
     'uf_pagador'        => 'PR',
-    'data_vencimento'   => '2016-04-09', // informar a data neste formato
-    'data_emissao'      => '2016-04-09', // informar a data neste formato
+    'data_vencimento'   => '2018-04-09', // informar a data neste formato
+    'data_emissao'      => '2018-04-09', // informar a data neste formato
     'vlr_juros'         => 0.15, // Valor do juros de 1 dia'
     'data_desconto'     => '2016-04-09', // informar a data neste formato
     'vlr_desconto'      => '0', // Valor do desconto
@@ -88,5 +91,7 @@ $lote->inserirDetalhe(array(
     //'taxa_multa'         => 0.00, // taxa de multa em percentual
     //'taxa_juros'         => 0.00, // taxa de juros em percentual
 ));        
+header("Content-Disposition: attachment;filename=" . $arquivo->getFileName() .";");
 echo utf8_decode($arquivo->getText()); // observar a header do seu php para não gerar comflitos de codificação de caracteres
+
 ?>

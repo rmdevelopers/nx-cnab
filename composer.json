@@ -1,13 +1,13 @@
 {
-	"name": "rctnet/opencnabphp",
+	"name": "quilhasoft/opencnabphp",
 	"type": "library",
-	"description": "Conjunto de classes para geração e leitura de arquivos Cnab de remessa e retorno",
-	"keywords": ["boleto", "remessa", "retorno", "cnab", "cnab240", "cnab400"],
+	"description": "Biblioteca multibanco para geração e leitura de arquivos Cnab de remessa e retorno",
+	"keywords": ["boleto", "remessa", "retorno", "cnabphp", "cnab240", "cnab400","itau","bradesco","caixa","santander","sicoob","uniprime"],
 	"licence": "MIT",
 	"authors": [
 		{
 			"name": "Rogerio Muniz de Castro",
-			"email": "rogerio@ciatec.net"
+			"email": "rogerio@quilhasoft.com.br"
 		}
 	],
 	"autoload": {
@@ -25,7 +25,7 @@
 		}
 	},
 	"require": {
-		"php": ">=7.0"
+		"php": ">=5.6"
 	},
 	"config": {},
 	"require-dev": {
