@@ -344,37 +344,56 @@ class Registro3P extends Generico3 {
         $this->data['nosso_numero_dv'] = (string)$Dv;
     }
 
+    protected static function formata_numdoc( $num, $tamanho ) {
+        while( strlen($num) < $tamanho) {
+            $num="0".$num;
+        }
+        return $num;
+    }
+    
+    
     protected static function modulo11($index, $ag, $conv) {
-        $sequencia = str_pad($ag, 4, 0, STR_PAD_LEFT) . str_pad($conv, 10, 0, STR_PAD_LEFT) . str_pad($index, 3, 0, STR_PAD_LEFT);
-        $cont = 0;
-        $calculoDv = 0;
-        for ($num = 0; $num <= strlen($sequencia); $num++) {
+
+        // Gerando o Nosso Número Corretamente
+        $nossoNumero = self::formata_numdoc($index,7);
+        $qtde_nosso_numero = strlen($nossoNumero);
+        $sequencia = self::formata_numdoc($ag,4).self::formata_numdoc(str_replace("-","",$conv),10).self::formata_numdoc($nossoNumero,7);
+        $cont=0;
+        $calculoDv = '';
+
+        for($num=0;$num<=strlen($sequencia);$num++) {
             $cont++;
-            if ($cont == 1) {
-                // constante fixa Sicoob » 3197
+            if($cont == 1) {
+                // Constante fixa Sicoob » 3197
                 $constante = 3;
             }
-            if ($cont == 2) {
+
+            if($cont == 2) {
                 $constante = 1;
             }
-            if ($cont == 3) {
+
+            if($cont == 3) {
                 $constante = 9;
             }
-            if ($cont == 4) {
+
+            if($cont == 4) {
                 $constante = 7;
                 $cont = 0;
             }
-            $calculoDv += ((int) substr($sequencia, $num, 1) * $constante);
+
+            $calculoDv = $calculoDv + (substr($sequencia,$num,1) * $constante);
         }
+
         $Resto = $calculoDv % 11;
-        if ($Resto == 0 || $Resto == 1) {
-            $Dv = 0;
-        } else {
-            $Dv = 11 - $Resto;
-        };
+        $Dv = 11 - $Resto;
+        if ($Dv == 0) $Dv = 0;
+        if ($Dv == 1) $Dv = 0;
+        if ($Dv > 9) $Dv = 0;
+
         return $Dv;
     }
 
+    
     public function inserirDetalhe($data) {
         $class = 'CnabPHP\resources\\B' . RemessaAbstract::$banco . '\remessa\\' . RemessaAbstract::$layout . '\Registro3Q';
         $this->children [] = new $class($data);
